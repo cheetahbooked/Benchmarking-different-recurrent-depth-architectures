@@ -1,4 +1,10 @@
-## llama2.c
+## Changes
+There are three new architectures implemented by changing the base model and you can acesss it by importing the desired architecture in train.py from: frailt, relaxed, three_part, control.
+
+In the hyperparameters section there is a section for the hyperparameters specific to the architecture, the three papers the architectures are based are [frailt](https://arxiv.org/abs/2401.11626), [relaxed](https://arxiv.org/abs/2410.20672), [https://arxiv.org/abs/2502.05171](https://arxiv.org/abs/2502.05171). 
+
+
+## From llama2.c
 
 <p align="center">
   <img src="assets/llama_cute.jpg" width="300" height="300" alt="Cute Llama">
