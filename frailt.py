@@ -255,18 +255,10 @@ class Transformer(nn.Module):
         h = self.dropout(h)
         freqs_cos = self.freqs_cos[:seqlen]
         freqs_sin = self.freqs_sin[:seqlen]
-        h += self.depth_embdeddings(torch.Tensor([0]).int().to('cuda'))
-        for layer in self.layers:
-            h = layer(h, freqs_cos, freqs_sin)
-        h += self.depth_embdeddings(torch.Tensor([1]).int().to('cuda'))
-        for layer in self.layers:
-            h = layer(h, freqs_cos, freqs_sin)
-        h += self.depth_embdeddings(torch.Tensor([2]).int().to('cuda'))
-        for layer in self.layers:
-            h = layer(h, freqs_cos, freqs_sin)
-        h += self.depth_embdeddings(torch.Tensor([3]).int().to('cuda'))
-        for layer in self.layers:
-            h = layer(h, freqs_cos, freqs_sin)
+        for loop in range(self.loops):
+            h += self.depth_embdeddings(torch.Tensor([loop]).int().to('cuda'))
+            for layer in self.layers:
+                h = layer(h, freqs_cos, freqs_sin)
         h = self.norm(h)
 
         if targets is not None:
